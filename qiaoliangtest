@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>地球显示</title>
+	<script src="./Scripts/Cesium/Cesium.js"></script>
+	<link rel="stylesheet" href="./Scripts/Cesium/Widgets/widgets.css">
+	<style>
+        html,body {
+	        height:100%;
+	        margin:0px;
+	         padding:0px;
+        }
+	</style>   
+</head>
+<body>
+    <div id="cesiumContainer" style="height: 100%"></div>
+    <script>
+         Cesium.Ion.defaultAccessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZDFmYzQ4Ni02OWE3LTRjMzAtYTE5Zi0wNjcxYWFlM2IxZGYiLCJpZCI6MTA3MjAwLCJpYXQiOjE2NjI0NjUzNDR9.c4zoZW6FscKnXWIkai3zVUZ2IjeHUhEwafc9HVYTZHc'
+         var viewer = new Cesium.Viewer('cesiumContainer',{
+	            terrainProvider:Cesium.createWorldTerrain({ //创建地形服务
+	                requestVertexNormals:true, //添加地形光照
+                    requestWaterMask:true //添加水面波浪效果
+	            })
+	        });
+	        viewer.scene.globe.enableLighting=true; //同时开启光照
+		
+		//加载构建的铁路桥梁模型	
+		const tileset = viewer.scene.primitives.add(
+  			new Cesium.Cesium3DTileset({
+    			url: Cesium.IonResource.fromAssetId(1338521),
+ 			 })
+		);
+
+
+		viewer.camera.flyTo({
+			destination : Cesium.Cartesian3. fromDegrees(117.4525, 40.392, 1400.0),
+			orientation :{
+				heading : Cesium.Math.toRadians(0.0),
+				pitch:Cesium.Math.toRadians(-70),
+				roll:0.0
+			},
+			duration:10
+		})
+    </script> 
+</body>
+</html>    
